@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:tag="layout/design_app_crashed_0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.github.kr328.clash.design.view.ObservableScrollView android:id="@id/scroll_root" android:tag="binding_1" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:id="@id/logs_view" android:paddingLeft="@dimen/logcat_padding_horizontal" android:paddingTop="@dimen/logcat_padding_vertical" android:paddingRight="@dimen/logcat_padding_horizontal" android:paddingBottom="@dimen/logcat_padding_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lineSpacingMultiplier="1.5" android:textIsSelectable="true" android:paddingHorizontal="@dimen/logcat_padding_horizontal" android:paddingVertical="@dimen/logcat_padding_vertical" />
+    </com.github.kr328.clash.design.view.ObservableScrollView>
+    <com.github.kr328.clash.design.view.ActivityBarLayout android:id="@id/activity_bar_layout" android:tag="binding_2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingEnd="@dimen/item_tailing_margin">
+        <include layout="@layout/common_activity_bar" />
+    </com.github.kr328.clash.design.view.ActivityBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="31" android:compileSdkVersionCodename="12" package="com.github.kr328.clash" platformBuildVersionCode="31" platformBuildVersionName="12">
+    <uses-feature android:name="android.software.leanback" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <permission android:description="@string/receive_broadcasts_of_clash" android:label="@string/receive_clash_broadcasts" android:name="com.github.kr328.clash.permission.RECEIVE_BROADCASTS" android:protectionLevel="privileged|signature"/>
+    <uses-permission android:name="com.github.kr328.clash.permission.RECEIVE_BROADCASTS"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:banner="@mipmap/ic_banner" android:fullBackupContent="@xml/full_backup_content" android:icon="@mipmap/ic_launcher" android:label="@string/application_name" android:name="com.github.kr328.clash.MainApplication" android:networkSecurityConfig="@xml/network_security_config" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/BootstrapTheme">
+        <meta-data android:name="releaseName" android:value="@string/release_name"/>
+        <meta-data android:name="releaseCode" android:value="@integer/release_code"/>
+        <activity android:configChanges="uiMode" android:exported="true" android:label="@string/launch_name" android:launchMode="singleTop" android:name="com.github.kr328.clash.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:label="@string/import_from_file" android:name="com.github.kr328.clash.ExternalImportActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="install-config" android:scheme="clash"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/application_broken" android:name="com.github.kr328.clash.ApkBrokenActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/application_crashed" android:launchMode="singleTask" android:name="com.github.kr328.clash.AppCrashedActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/profiles" android:name="com.github.kr328.clash.ProfilesActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/create_profile" android:name="com.github.kr328.clash.NewProfileActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/profile" android:name="com.github.kr328.clash.PropertiesActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/proxy" android:name="com.github.kr328.clash.ProxyActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/providers" android:name="com.github.kr328.clash.ProvidersActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/logs" android:name="com.github.kr328.clash.LogsActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/logcat" android:name="com.github.kr328.clash.LogcatActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/settings" android:name="com.github.kr328.clash.SettingsActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/network" android:name="com.github.kr328.clash.NetworkSettingsActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/app" android:name="com.github.kr328.clash.AppSettingsActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/override" android:name="com.github.kr328.clash.OverrideSettingsActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/access_control_packages" android:name="com.github.kr328.clash.AccessControlActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/help" android:name="com.github.kr328.clash.HelpActivity"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:label="@string/files" android:name="com.github.kr328.clash.FilesActivity"/>
+        <service android:exported="false" android:label="@string/clash_logcat" android:name="com.github.kr328.clash.LogcatService"/>
+        <service android:exported="true" android:icon="@drawable/ic_logo_service" android:label="@string/launch_name" android:name="com.github.kr328.clash.TileService" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+        <receiver android:enabled="false" android:exported="true" android:name="com.github.kr328.clash.RestartReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:label="@string/clash_for_android" android:name="com.github.kr328.clash.service.ClashService" android:process=":background"/>
+        <service android:exported="false" android:label="@string/clash_for_android" android:name="com.github.kr328.clash.service.TunService" android:permission="android.permission.BIND_VPN_SERVICE" android:process=":background">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.github.kr328.clash.service.RemoteService" android:process=":background"/>
+        <service android:exported="false" android:name="com.github.kr328.clash.service.ProfileWorker" android:process=":background"/>
+        <provider android:authorities="com.github.kr328.clash.files" android:exported="true" android:grantUriPermissions="true" android:name="com.github.kr328.clash.service.FilesProvider" android:permission="android.permission.MANAGE_DOCUMENTS" android:process=":background">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER"/>
+            </intent-filter>
+        </provider>
+        <provider android:authorities="com.github.kr328.clash.status" android:exported="false" android:name="com.github.kr328.clash.service.StatusProvider" android:process=":background"/>
+        <provider android:authorities="com.github.kr328.clash.settings" android:exported="false" android:name="com.github.kr328.clash.service.PreferenceProvider" android:process=":background"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.github.kr328.clash.service.ProfileReceiver" android:permission="com.github.kr328.clash.permission.RECEIVE_BROADCASTS" android:process=":background">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="{applicationId}.intent.action.PROFILE_REQUEST_UPDATE"/>
+                <data android:scheme="uuid"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.github.kr328.clash.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+        </provider>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+    </application>
+</manifest>
