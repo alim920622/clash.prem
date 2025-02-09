@@ -1,0 +1,28 @@
+log-level: error
+
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  default-nameserver: [ tls://8.8.8.8 ]
+  nameserver: [ tls://one.one.one.one ]
+  fallback-filter: { geoip: false }
+  fake-ip-filter:
+    - '+.lan'
+    - '+.local'
+
+
+proxies:
+  - name: proxy
+    type: ss
+    server: 141.227.138.152
+    port: 8090
+    cipher: aes-128-gcm
+    password: 'alim'
+    udp: true
+
+
+rule-providers:
+
+
+rules:
+  - MATCH,proxy
